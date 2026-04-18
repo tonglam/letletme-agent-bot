@@ -68,6 +68,6 @@ export class NotificationService implements NotificationServicePort {
   }
 
   private formatText(text: string) {
-    return `[letletme-agent-bot] ${text}`;
+    return `[letletme-telegram-bot] ${text}`;
   }
 }

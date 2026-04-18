@@ -2,7 +2,7 @@
   "lockfileVersion": 1,
   "workspaces": {
     "": {
-      "name": "letletme-agent-bot",
+      "name": "letletme-telegram-bot",
       "dependencies": {
         "elysia": "^1.1.25",
       },

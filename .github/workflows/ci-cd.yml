@@ -36,13 +36,13 @@ jobs:
           cp -R scripts bundle/scripts
           cp README.md bundle/README.md
           cp DEPLOYMENT.md bundle/DEPLOYMENT.md
-          tar -czf letletme-agent-bot-dist.tar.gz -C bundle .
+          tar -czf letletme-telegram-bot-dist.tar.gz -C bundle .
 
       - name: Upload deploy bundle
         uses: actions/upload-artifact@v4
         with:
-          name: letletme-agent-bot-dist
-          path: letletme-agent-bot-dist.tar.gz
+          name: letletme-telegram-bot-dist
+          path: letletme-telegram-bot-dist.tar.gz
 
   deploy:
     if: github.ref == 'refs/heads/main'
@@ -52,7 +52,7 @@ jobs:
       - name: Download deploy bundle
         uses: actions/download-artifact@v4
         with:
-          name: letletme-agent-bot-dist
+          name: letletme-telegram-bot-dist
           path: .
 
       - name: Create app home on server
@@ -62,7 +62,7 @@ jobs:
           username: ${{ secrets.DEPLOY_USERNAME }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           script: |
-            mkdir -p /home/workspace/letletme-agent-bot/{dist,logs,run,scripts}
+            mkdir -p /home/workspace/letletme-telegram-bot/{dist,logs,run,scripts}
 
       - name: Copy bundle to server
         uses: appleboy/scp-action@v0.1.7
@@ -70,8 +70,8 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USERNAME }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
-          source: "letletme-agent-bot-dist.tar.gz"
-          target: "/home/workspace/letletme-agent-bot/"
+          source: "letletme-telegram-bot-dist.tar.gz"
+          target: "/home/workspace/letletme-telegram-bot/"
           strip_components: 0
 
       - name: Deploy to server
@@ -81,7 +81,7 @@ jobs:
           username: ${{ secrets.DEPLOY_USERNAME }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           script: |
-            cd /home/workspace/letletme-agent-bot
-            tar -xzf letletme-agent-bot-dist.tar.gz
+            cd /home/workspace/letletme-telegram-bot
+            tar -xzf letletme-telegram-bot-dist.tar.gz
             chmod +x scripts/*.sh
             ./scripts/rerun.sh

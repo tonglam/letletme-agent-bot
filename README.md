@@ -1,6 +1,6 @@
-# letletme-agent-bot
+# letletme-telegram-bot
 
-`letletme-agent-bot` is a Bun + TypeScript + Elysia notification service that sends Telegram messages through the Telegram Bot API.
+`letletme-telegram-bot` is a Bun + TypeScript + Elysia notification service that sends Telegram messages through the Telegram Bot API.
 
 The current role of this project is notification delivery, not interactive command handling. Other systems call one HTTP endpoint, and this service turns those requests into Telegram text or image notifications.
 
@@ -9,7 +9,7 @@ The current role of this project is notification delivery, not interactive comma
 - exposes one canonical notification endpoint: `POST /telegramBot/letletme/notification`
 - sends text notifications with direct Telegram Bot API `sendMessage` calls
 - sends image notifications with direct Telegram Bot API `sendPhoto` calls
-- prefixes outbound text notifications as `[letletme-agent-bot] <content>`
+- prefixes outbound text notifications as `[letletme-telegram-bot] <content>`
 - supports a default text destination through env when a text payload omits `targets`
 - deploys to the VPS at `43.163.91.9`
 
@@ -56,7 +56,7 @@ Or, relying on the default text target:
 Delivered Telegram text format:
 
 ```text
-[letletme-agent-bot] deployment finished
+[letletme-telegram-bot] deployment finished
 ```
 
 ### Image Notification
@@ -152,7 +152,7 @@ The repo includes:
 The VPS app home is:
 
 ```bash
-/home/workspace/letletme-agent-bot
+/home/workspace/letletme-telegram-bot
 ```
 
 The live service currently runs on:

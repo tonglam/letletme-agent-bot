@@ -3,11 +3,11 @@
 ## Server & Runtime
 - Target host: `43.163.91.9`
 - Runtime: Bun 1.2.12 or compatible
-- App home: `/home/workspace/letletme-agent-bot`
+- App home: `/home/workspace/letletme-telegram-bot`
 
 ## Directory Layout
 ```
-/home/workspace/letletme-agent-bot
+/home/workspace/letletme-telegram-bot
 ├── dist/          # bundled Bun output
 ├── logs/          # console logs
 ├── run/           # PID tracking
@@ -17,11 +17,11 @@
 
 Create the tree on first deploy:
 ```bash
-mkdir -p /home/workspace/letletme-agent-bot/{dist,logs,run,scripts}
+mkdir -p /home/workspace/letletme-telegram-bot/{dist,logs,run,scripts}
 ```
 
 ## Environment Variables
-Put secrets in `/home/workspace/letletme-agent-bot/.env` and guard permissions (`chmod 600`).
+Put secrets in `/home/workspace/letletme-telegram-bot/.env` and guard permissions (`chmod 600`).
 
 Required:
 ```bash

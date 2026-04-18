@@ -20,4 +20,4 @@ const app = createApp({
 
 app.listen(env.port);
 
-console.log(`letletme-agent-bot listening on port ${env.port} (${env.timezone})`);
+console.log(`letletme-telegram-bot listening on port ${env.port} (${env.timezone})`);

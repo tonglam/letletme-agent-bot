@@ -32,8 +32,8 @@ describe("NotificationService", () => {
       failures: []
     });
     expect(calls).toEqual([
-      { kind: "text", target: "1001", text: "[letletme-agent-bot] hello" },
-      { kind: "text", target: 1002, text: "[letletme-agent-bot] hello" }
+      { kind: "text", target: "1001", text: "[letletme-telegram-bot] hello" },
+      { kind: "text", target: 1002, text: "[letletme-telegram-bot] hello" }
     ]);
   });
 
@@ -67,7 +67,7 @@ describe("NotificationService", () => {
       failures: []
     });
     expect(calls).toEqual([
-      { kind: "text", target: "5365651891", text: "[letletme-agent-bot] hello" }
+      { kind: "text", target: "5365651891", text: "[letletme-telegram-bot] hello" }
     ]);
   });
 

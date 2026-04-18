@@ -1,5 +1,5 @@
 {
-  "name": "letletme-agent-bot",
+  "name": "letletme-telegram-bot",
   "version": "0.1.0",
   "private": true,
   "type": "module",

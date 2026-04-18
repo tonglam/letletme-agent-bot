@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-APP_NAME=${APP_NAME:-letletme-agent-bot}
-APP_HOME=${APP_HOME:-/home/workspace/letletme-agent-bot}
+APP_NAME=${APP_NAME:-letletme-telegram-bot}
+APP_HOME=${APP_HOME:-/home/workspace/letletme-telegram-bot}
 DIST_DIR=${DIST_DIR:-"$APP_HOME/dist"}
 LOG_DIR=${LOG_DIR:-"$APP_HOME/logs"}
 RUN_DIR=${RUN_DIR:-"$APP_HOME/run"}
