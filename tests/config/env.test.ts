@@ -13,13 +13,15 @@ describe("parseEnv", () => {
         TELEGRAM_BOT_TOKEN: "token",
         PORT: "8026",
         TIMEZONE: "Australia/Perth",
-        NOTIFICATION_API_TOKEN: "secret"
+        NOTIFICATION_API_TOKEN: "secret",
+        DEFAULT_TEXT_NOTIFICATION_TARGET: "5365651891"
       })
     ).toEqual({
       telegramBotToken: "token",
       port: 8026,
       timezone: "Australia/Perth",
-      notificationApiToken: "secret"
+      notificationApiToken: "secret",
+      defaultTextNotificationTarget: "5365651891"
     });
   });
 });

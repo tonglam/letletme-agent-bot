@@ -89,6 +89,44 @@ describe("notification route", () => {
     });
   });
 
+  test("accepts a text notification request without targets", async () => {
+    let capturedTargets: Array<string | number> = [];
+    const service: NotificationServicePort = {
+      send: async (notification) => {
+        capturedTargets = notification.targets;
+        return {
+          status: "success",
+          notificationType: notification.type,
+          requestedCount: 1,
+          deliveredCount: 1,
+          failedCount: 0,
+          failures: []
+        };
+      }
+    };
+
+    const app = createApp({
+      notificationService: service,
+      apiToken: undefined
+    });
+
+    const response = await app.handle(
+      new Request("http://localhost/telegramBot/letletme/notification", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({
+          type: "text",
+          text: "hello"
+        })
+      })
+    );
+
+    expect(response.status).toBe(200);
+    expect(capturedTargets).toEqual([]);
+  });
+
   test("rejects invalid notification payloads", async () => {
     const service: NotificationServicePort = {
       send: async () => {

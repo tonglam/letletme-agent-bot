@@ -5,13 +5,21 @@ export interface NotificationServicePort {
   send(notification: NotificationRequest): Promise<NotificationResult>;
 }
 
+type NotificationServiceOptions = {
+  defaultTextTarget?: string | undefined;
+};
+
 export class NotificationService implements NotificationServicePort {
-  constructor(private readonly telegramClient: TelegramClient) {}
+  constructor(
+    private readonly telegramClient: TelegramClient,
+    private readonly options: NotificationServiceOptions = {}
+  ) {}
 
   async send(notification: NotificationRequest): Promise<NotificationResult> {
     const failures: NotificationFailure[] = [];
+    const targets = this.resolveTargets(notification);
 
-    for (const target of notification.targets) {
+    for (const target of targets) {
       try {
         if (notification.type === "text") {
           await this.telegramClient.sendText({
@@ -33,7 +41,7 @@ export class NotificationService implements NotificationServicePort {
       }
     }
 
-    const requestedCount = notification.targets.length;
+    const requestedCount = targets.length;
     const failedCount = failures.length;
     const deliveredCount = requestedCount - failedCount;
 
@@ -45,5 +53,17 @@ export class NotificationService implements NotificationServicePort {
       failedCount,
       failures
     };
+  }
+
+  private resolveTargets(notification: NotificationRequest) {
+    if (notification.targets.length > 0) {
+      return notification.targets;
+    }
+
+    if (notification.type === "text" && this.options.defaultTextTarget) {
+      return [this.options.defaultTextTarget];
+    }
+
+    return notification.targets;
   }
 }

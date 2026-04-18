@@ -37,6 +37,38 @@ describe("NotificationService", () => {
     ]);
   });
 
+  test("uses the configured default text target when none is provided", async () => {
+    const calls: Array<{ kind: string; target: string | number; text?: string | undefined }> = [];
+    const client: TelegramClient = {
+      sendText: async ({ target, text }) => {
+        calls.push({ kind: "text", target, text });
+      },
+      sendPhoto: async () => {
+        throw new Error("sendPhoto should not be called");
+      }
+    };
+
+    const service = new NotificationService(client, {
+      defaultTextTarget: "5365651891"
+    });
+
+    const result = await service.send({
+      type: "text",
+      targets: [],
+      text: "hello"
+    });
+
+    expect(result).toEqual({
+      status: "success",
+      notificationType: "text",
+      requestedCount: 1,
+      deliveredCount: 1,
+      failedCount: 0,
+      failures: []
+    });
+    expect(calls).toEqual([{ kind: "text", target: "5365651891", text: "hello" }]);
+  });
+
   test("sends image notifications through the photo path and preserves caption", async () => {
     const calls: Array<{ kind: string; target: string | number; imageUrl?: string | undefined; caption?: string | undefined }> = [];
     const client: TelegramClient = {

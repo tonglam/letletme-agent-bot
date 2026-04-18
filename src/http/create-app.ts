@@ -6,7 +6,7 @@ const targetSchema = t.Union([t.String(), t.Number()]);
 
 const textNotificationSchema = t.Object({
   type: t.Literal("text"),
-  targets: t.Array(targetSchema, { minItems: 1 }),
+  targets: t.Optional(t.Array(targetSchema)),
   text: t.String({ minLength: 1 })
 });
 
@@ -35,7 +35,10 @@ export function createApp({ notificationService, apiToken }: CreateAppOptions) {
           };
         }
 
-        return notificationService.send(body);
+        return notificationService.send({
+          ...body,
+          targets: body.targets ?? []
+        });
       },
       {
         body: t.Union([textNotificationSchema, imageNotificationSchema])

@@ -9,7 +9,9 @@ const telegramClient = new TelegramBotApiClient({
   botToken: env.telegramBotToken
 });
 
-const notificationService = new NotificationService(telegramClient);
+const notificationService = new NotificationService(telegramClient, {
+  defaultTextTarget: env.defaultTextNotificationTarget
+});
 
 const app = createApp({
   notificationService,

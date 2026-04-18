@@ -3,6 +3,7 @@ export type AppEnv = {
   port: number;
   timezone: string;
   notificationApiToken: string | undefined;
+  defaultTextNotificationTarget: string | undefined;
 };
 
 type EnvSource = Record<string, string | undefined>;
@@ -19,7 +20,8 @@ export function parseEnv(source: EnvSource): AppEnv {
     telegramBotToken,
     port,
     timezone: source.TIMEZONE?.trim() || "UTC",
-    notificationApiToken: source.NOTIFICATION_API_TOKEN?.trim() || undefined
+    notificationApiToken: source.NOTIFICATION_API_TOKEN?.trim() || undefined,
+    defaultTextNotificationTarget: source.DEFAULT_TEXT_NOTIFICATION_TARGET?.trim() || undefined
   };
 }
 
