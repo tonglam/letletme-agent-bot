@@ -24,7 +24,7 @@ export class NotificationService implements NotificationServicePort {
         if (notification.type === "text") {
           await this.telegramClient.sendText({
             target,
-            text: notification.text
+            text: this.formatText(notification.text)
           });
         } else {
           await this.telegramClient.sendPhoto({
@@ -65,5 +65,9 @@ export class NotificationService implements NotificationServicePort {
     }
 
     return notification.targets;
+  }
+
+  private formatText(text: string) {
+    return `[letletme-agent-bot] ${text}`;
   }
 }

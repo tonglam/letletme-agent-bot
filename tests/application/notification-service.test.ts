@@ -32,8 +32,8 @@ describe("NotificationService", () => {
       failures: []
     });
     expect(calls).toEqual([
-      { kind: "text", target: "1001", text: "hello" },
-      { kind: "text", target: 1002, text: "hello" }
+      { kind: "text", target: "1001", text: "[letletme-agent-bot] hello" },
+      { kind: "text", target: 1002, text: "[letletme-agent-bot] hello" }
     ]);
   });
 
@@ -66,7 +66,9 @@ describe("NotificationService", () => {
       failedCount: 0,
       failures: []
     });
-    expect(calls).toEqual([{ kind: "text", target: "5365651891", text: "hello" }]);
+    expect(calls).toEqual([
+      { kind: "text", target: "5365651891", text: "[letletme-agent-bot] hello" }
+    ]);
   });
 
   test("sends image notifications through the photo path and preserves caption", async () => {
