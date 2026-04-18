@@ -1,9 +1,14 @@
 # letletme-agent-bot
 
-Bun and Elysia rewrite of the existing Java Telegram bot service.
+Bun and Elysia Telegram notification service.
 
 ## Scope
 
-- v1 is bot-first parity for the existing Telegram bot commands
+- v1 exposes a single HTTPS notification endpoint for Telegram text and image sends
+- v1 uses direct Telegram Bot API calls instead of a bot framework
+- future `/` bot commands will be added on top of the current transport boundaries
 - deployment target remains the existing VPS at 43.163.91.9
-- this repo is intentionally separate from the current Java service
+
+## API
+
+- `POST /telegramBot/letletme/notification`
